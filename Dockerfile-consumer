@@ -1,0 +1,15 @@
+
+FROM python:3.8
+
+RUN pip install --upgrade avro-python3
+RUN pip install --upgrade confluent-kafka
+RUN python -m pip install -U pymongo
+RUN pip install requests
+
+WORKDIR /app
+COPY consumer.py  /app
+
+ADD auth/group5/ app/auth/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+ENTRYPOINT ["python3","-u"]
+

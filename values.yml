@@ -1,0 +1,16 @@
+
+
+functions:
+  imagePullPolicy: "IfNotPresent"
+...
+  readinessProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 1
+    periodSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  livenessProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 1
+    periodSeconds: 1
+    failureThreshold: 3

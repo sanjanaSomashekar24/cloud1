@@ -1,0 +1,4 @@
+# request-api/requirements.txt
+flask
+waitress
+pymongo

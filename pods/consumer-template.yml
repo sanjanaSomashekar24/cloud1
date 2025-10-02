@@ -1,0 +1,42 @@
+# pods/pod-template.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: experiment-consumer
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: experiment-consumer
+  template:
+    metadata:
+      labels:
+        app: experiment-consumer
+    spec:
+      containers:
+        - name: experiment-consumer
+          image: image/experiment-consumer
+          imagePullPolicy: IfNotPresent
+          args: [
+              "consumer.py", "group5"
+            ]
+          volumeMounts:
+            - name: config-vol
+              mountPath: /app/auth
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+      volumes:
+        - name: config-vol
+          configMap:
+            name: kafka-auth
+            items:
+              - key: kafka.truststore.pkcs12
+                path: kafka.truststore.pkcs12
+              - key: kafka.keystore.pkcs12
+                path: kafka.keystore.pkcs12
+              - key: ca.crt
+                path: ca.crt
+      restartPolicy: Always
+
